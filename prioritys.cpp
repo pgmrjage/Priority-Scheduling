@@ -44,15 +44,19 @@ int priority(int processes) {
     float wtTotal = 0;
     int currentTime = 0;
 
-    cout << "Process\tArrival Time\tBurst Time\tWaiting Time\tPriority\n";
+    // Output Section
+    cout << "Process\tArrival Time\tBurst Time\tPriority\tWaiting Time\n";
     while (!pq.empty()) {
         Process p = pq.top(); pq.pop();
-        wt[currentTime] = max(0, currentTime - p.arrival_time);
-        wtTotal += wt[currentTime];
+        
+        int waitTime = max(0, currentTime - p.arrival_time);
+        wt[currentTime] += waitTime;
+        wtTotal += waitTime;
+
         currentTime += p.burst_time;
 
         cout << p.process_name << "\t" << p.arrival_time << "\t\t" << p.burst_time
-             << "\t\t" << wt[currentTime - 1] << "\t\t" << p.priority <<endl;
+             << "\t\t" << p.priority << "\t\t" << waitTime <<endl;
     }
 
     cout << "\nAverage Waiting Time: " << fixed << setprecision(2) << wtTotal / processes << endl;
@@ -64,15 +68,12 @@ int main() {
     char again = 'Y';
 
     do {
-        
-
         cout << "=====================================" << endl;
         cout << "PRIORITY QUEUE SCHEDULING" << endl;
         cout << "=====================================" << endl;
         int processes;
         cout << "Input number of processes: "; cin >> processes;
             priority(processes);
-        
         cout << "Invalid choice. Try again? (Y/N): "; cin >> again;
 
     } while (again == 'Y' || again == 'y');
