@@ -31,7 +31,7 @@ int priority(int processes) {
         cout << "Process [" << i + 1 << "]\n";
         cout << "Arrival Time: "; cin >> at[i];
         cout << "Burst Time: "; cin >> bt[i];
-        cout << "Priority (lower number is higher priority): "; cin >> priority[i];
+        cout << "Priority: "; cin >> priority[i];
     }
 
     // Priority queue to sort processes based on priority
